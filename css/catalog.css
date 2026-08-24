@@ -843,6 +843,10 @@ main {
     }
     #products {
         grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-        gap: 8px;
+    }
+    .product-card {
+    margin-top: 8px;
+    margin-left: 4px;
+    margin-right: 4px;
     }
 }
