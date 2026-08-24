@@ -109,21 +109,23 @@
         productsContainer.innerHTML = "<p style='color: #888; text-align: center; width: 100%; grid-column: 1/-1;'>Загрузка товаров...</p>";
 
         // Принудительно запрашиваем свежие данные из Google Таблицы
+        var startTime = performance.now();
+
         fetch(API_URL)
-            .then(function(res) { return res.json(); })
+            .then(function(res) {
+                console.log("Ответ от Apps Script получен за:",Math.round(performance.now() - startTime),"мс");
+                return res.json();
+            })
             .then(function(data) {
-                console.log("ДАННЫЕ ИЗ ТАБРИКИ:", data);
-            
-                allProducts = filterValidProducts(data);
+                console.log("Данные полностью получены за:",Math.round(performance.now() - startTime),"мс");
+                console.log("ДАННЫЕ ИЗ ТАБРИЦЫ:", data);
+                console.log("Время запроса к Tabrica:", data.debug.tabricaTime, "мс");
+
+                allProducts = filterValidProducts(data.records);
             
                 var availableProducts = allProducts.filter(function(product) {
-                    console.log(
-                        "Товар:",
-                        product["НАЗВАНИЕ"],
-                        "| СТАТУС:",
-                        product["СТАТУС"]
-                    );
-                
+                    console.log("Товар:",product["НАЗВАНИЕ"],"| СТАТУС:",product["СТАТУС"]);
+
                     var status = String(product["СТАТУС"] || "").trim().toLowerCase();
                 
                     return status === "в наличии";
@@ -137,7 +139,7 @@
                 console.error("Ошибка загрузки:", err);
                 productsContainer.innerHTML = "<p style='color: rgb(255, 0, 51); text-align: center; width: 100%; grid-column: 1/-1;'>Ошибка загрузки товаров, перезайдите на страницу.</p>";
             });
-
+        
         setupModalEvents();
     });
 
@@ -181,7 +183,7 @@
 
             card.innerHTML = 
                 '<div class="product-image-wrap">' +
-                    '<img src="' + mainImage + '" alt="' + name + '" class="product-img" onerror="this.src=\'' + FALLBACK_IMAGE + '\'">' +
+                    '<img src="' + mainImage + '" loading="lazy" alt="' + name + '" class="product-img" onerror="this.src=\'' + FALLBACK_IMAGE + '\'">' +
                     '<span class="product-badge">' + size + '</span>' +
                 '</div>' +
                 '<div class="product-details">' +

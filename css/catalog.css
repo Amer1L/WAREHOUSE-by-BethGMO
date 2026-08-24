@@ -102,11 +102,9 @@ main {
     color: #ffffff;
 }
 
-.catalog-title h1 {
-    font-size: 2rem;
-    margin: 15px 0 25px 0;
-    text-transform: uppercase;
-    font-weight: 700;
+.catalog-title h2 {
+    font-size: 20px;
+    margin-bottom: 15px;
 }
 
 /* Сетка категорий (в стиле кнопок с главной) */
@@ -114,7 +112,7 @@ main {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
     gap: 10px;
-    margin-bottom: 30px;
+    margin-bottom: 0px;
             /* 1. Главное свойство — блюрит всё, что находится ЗА этим блоком */
     backdrop-filter: blur(5px); 
     -webkit-backdrop-filter: blur(10px); /* Для Safari и WebKit */
@@ -127,6 +125,26 @@ main {
     border-radius: 12px;
     padding: 20px;
 }
+
+
+.drop-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 0.3fr));
+    gap: 10px;
+    margin-bottom: 0px;
+            /* 1. Главное свойство — блюрит всё, что находится ЗА этим блоком */
+    backdrop-filter: blur(5px); 
+    -webkit-backdrop-filter: blur(10px); /* Для Safari и WebKit */
+
+    /* 2. Полупрозрачный цвет фона (обязательно!), иначе размытие не будет видно */
+    background-color: rgba(13, 13, 13, 0.214); /* Темная плашка (60% прозрачности) */
+
+    /* 3. Опционально: эффектная неоновая или тонкая рамка */
+    border: 2px solid rgba(255, 255, 255, 0.178);
+    border-radius: 12px;
+    padding: 20px;
+}
+
 
 .category-btn {
     display: flex;
@@ -157,11 +175,14 @@ main {
     border-color: yellowgreen;
 }
 
+
+
 /* Сетка товаров с эффектом стекла */
 #products {
     display: grid;
+    /*grid-template-columns: repeat(2, minmax(0, 1fr));*/
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 16px;
+    gap: 0px;
 }
 
 .product-card {
@@ -176,6 +197,9 @@ main {
     justify-content: space-between;
     transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
     cursor: pointer;
+    margin-top: 16px;
+    margin-left: 8px;
+    margin-right: 8px;
 }
 
 .product-card:hover {
@@ -816,5 +840,9 @@ main {
 
     .modal-body {
         grid-template-columns: 1fr;
+    }
+    #products {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 16px;
     }
 }
