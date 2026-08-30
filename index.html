@@ -121,5 +121,36 @@
 
     <script src="script.js"></script>
 
+
+
+
+    <!--Остановка сайта на время добавления дропа:-->
+
+    <div id="maintenance">
+        <section class="hero">
+            <p class="small-text">WAREHOUSE</p>
+
+            <h1>
+                <a class="z">С</a><a class="z">а</a><a class="z">й</a><a class="z">т </a><a class="z">о</a><a class="z">с</a><a class="z">т</a><a class="z">а</a><a class="z">н</a><a class="z">о</a><a class="z">в</a><a class="z">л</a><a class="z">е</a><a class="z">н</a>
+            </h1>
+
+            <p class="description">
+                Сайт временно остановлен на время проверки нового дропа
+                <br><br>
+                «THE START» DROP⁰¹; «STUDIES» DROP⁰²
+            </p>
+        </section>
+    </div>
+
+    <script>
+        const MAINTENANCE_MODE = true;
+
+        if (MAINTENANCE_MODE) {
+            document.getElementById("maintenance").style.display = "flex";
+        }
+    </script>
+
+
+
 </body>
 </html>

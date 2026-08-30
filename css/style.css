@@ -220,3 +220,42 @@ main {
         padding-top: 40px;
     }
 }
+
+
+#maintenance {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+
+    padding: 20px;
+
+    background: rgba(0, 0, 0, 0.37);
+    backdrop-filter: blur(10px);
+
+    align-items: center;
+    justify-content: center;
+}
+
+#maintenance .hero {
+    width: 100%;
+    max-width: 700px;
+    
+}  
+
+#maintenance .small-text {
+    font-size: 28px;
+    font-weight: 800;
+    letter-spacing: 3px;
+}
+
+#maintenance .z {
+    color: white;
+    transition: color 0.3s ease;
+    cursor: default;
+}
+#maintenance .z:hover {
+    color: yellowgreen;
+}
+
+
