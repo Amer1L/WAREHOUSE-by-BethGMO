@@ -173,7 +173,7 @@
             var name = product["НАЗВАНИЕ"] || "Без названия";
             var price = product["ЦЕНА"] || 0;
             var size = product["РАЗМЕР"] || "M";
-            var measurements = product["ДЛИНА/ШИРИНА"] || "";
+            /*var measurements = product["ДЛИНА/ШИРИНА"] || "";*/
             
             var rawPhoto = String(product["ФОТО"] || "").trim();
             var photos = rawPhoto ? rawPhoto.split(",") : [FALLBACK_IMAGE];
@@ -186,7 +186,7 @@
                 '</div>' +
                 '<div class="product-details">' +
                     '<h3 class="product-title">' + name + '</h3>' +
-                    (measurements ? '<p class="product-measurements">Замеры: ' + measurements + '</p>' : '') +
+                    /*(measurements ? '<p class="product-measurements">Замеры: ' + measurements + '</p>' : '') +*/
                     '<div class="product-bottom">' +
                         '<span class="product-price">' + price + ' ₽</span>' +
                         '<button class="buy-btn" data-id="' + id + '">СМОТРЕТЬ</button>' +
@@ -208,7 +208,7 @@
         document.getElementById("modal-title").innerText = item["НАЗВАНИЕ"] || "Без названия";
         document.getElementById("modal-price").innerText = (item["ЦЕНА"] || 0) + " ₽";
         document.getElementById("modal-size").innerText = item["РАЗМЕР"] || "Не указан";
-        document.getElementById("modal-measurements").innerText = item["ДЛИНА/ШИРИНА"] || "По запросу";
+        /*document.getElementById("modal-measurements").innerText = item["ДЛИНА/ШИРИНА"] || "По запросу";*/
         document.getElementById("modal-desc").innerText = item["ОПИСАНИЕ"] || "Описание отсутствует.";
         
         updateModalImage();
