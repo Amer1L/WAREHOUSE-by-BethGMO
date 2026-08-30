@@ -132,6 +132,8 @@
             console.log("ТОВАРОВ В НАЛИЧИИ:", availableProducts);
         
             renderProducts(availableProducts, productsContainer);
+            //__________________________
+            preloadProductImages(availableProducts);
         })
             .catch(function(err) {
                 console.error("Ошибка загрузки:", err);
@@ -490,6 +492,29 @@
                 }
             };
         }
+    }
+
+
+    //__________________________________
+    function preloadProductImages(products) {
+    products.forEach(function(product) {
+            var rawPhoto = String(product["ФОТО"] || "").trim();
+
+            if (!rawPhoto) return;
+
+            var photos = rawPhoto
+                .split(",")
+                .map(function(s) {
+                    return s.trim();
+                })
+                .filter(Boolean);
+
+            // Загружаем фотографии начиная со второй
+            for (var i = 1; i < photos.length; i++) {
+                var img = new Image();
+                img.src = photos[i];
+            }
+        });
     }
 
     
