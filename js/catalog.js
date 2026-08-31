@@ -130,6 +130,13 @@
             });
         
             console.log("ТОВАРОВ В НАЛИЧИИ:", availableProducts);
+
+            
+            availableProducts.sort(function(a, b) {
+                return Number(a["ПОРЯДОК"] || 999999) - Number(b["ПОРЯДОК"] || 999999);
+            });
+
+
         
             renderProducts(availableProducts, productsContainer);
             //__________________________
