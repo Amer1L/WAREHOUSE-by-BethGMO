@@ -131,7 +131,7 @@
         
             console.log("ТОВАРОВ В НАЛИЧИИ:", availableProducts);
 
-            
+
             availableProducts.sort(function(a, b) {
                 return Number(a["ПОРЯДОК"] || 999999) - Number(b["ПОРЯДОК"] || 999999);
             });
@@ -429,6 +429,9 @@
             return;
         }
 
+        var hasExchangeItems =
+        document.getElementById("has-exchange-items").checked;
+
 
         var checkoutBtn = document.getElementById("checkout-btn");
         checkoutBtn.disabled = true;
@@ -440,6 +443,7 @@
             address: address,
             payment: payment,
             comment: comment || "Нет комментария",
+            hasExchangeItems: hasExchangeItems,
             items: cart
         };
 
@@ -462,6 +466,7 @@
             checkoutBtn.disabled = false;
             checkoutBtn.innerText = "ОФОРМИТЬ ЗАКАЗ";
         });
+
     }
 
     function setupModalEvents() {
