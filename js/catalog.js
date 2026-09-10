@@ -1,6 +1,6 @@
 var API_URL = "https://script.google.com/macros/s/AKfycbyojAy2H8xpT74OARTBWDv2SYUDINOWjzkRFzacfWIxE2AgY46AcFrnPItSqZWKls-D/exec";
 
-
+console.log("CATALOG: JS ЗАПУСТИЛСЯ", new Date().toLocaleTimeString());
 
 var urlParams = new URLSearchParams(window.location.search);
 
@@ -259,6 +259,7 @@ document.addEventListener("DOMContentLoaded", function() {
     // ------------------------------
 
 
+    console.log("CATALOG: НАЧАЛ FETCH", new Date().toLocaleTimeString());
 
     fetch(API_URL)
 
@@ -266,7 +267,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
         .then(function(res) {
 
-
+            console.log("CATALOG: ПОЛУЧИЛ RESPONSE", new Date().toLocaleTimeString());
 
             if (!res.ok) {
 
