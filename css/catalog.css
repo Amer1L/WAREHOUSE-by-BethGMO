@@ -850,3 +850,14 @@ main {
     margin-right: 4px;
     }
 }
+
+.catalog-loading {
+    display: none;
+    width: 100%;
+    text-align: center;
+    padding: 25px 0;
+    color: #ffffff;
+    font-size: 18px;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
