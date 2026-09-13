@@ -17,7 +17,9 @@ function askPassword() {
         return;
     }
 
-    loadProducts(password);
+    adminPassword = password;
+
+    loadProducts(adminPassword);
 }
 
 function loadProducts(password) {
@@ -155,12 +157,6 @@ function renderProducts(products) {
 
 function moveProduct(rowId, direction) {
 
-    var password = prompt("Введите пароль администратора:");
-
-    if (!password) {
-        return;
-    }
-
     statusElement.textContent = "ПЕРЕМЕЩЕНИЕ...";
 
     fetch(API_URL, {
@@ -172,7 +168,7 @@ function moveProduct(rowId, direction) {
             action: "adminMoveProduct",
             rowId: rowId,
             direction: direction,
-            password: password
+            password: adminPassword
         })
     })
         .then(function(response) {
@@ -188,7 +184,7 @@ function moveProduct(rowId, direction) {
 
             statusElement.textContent = "ГОТОВО";
 
-            loadProducts(password);
+            loadProducts(adminPassword);
         })
         .catch(function(error) {
             console.error("ADMIN: ошибка перемещения", error);
