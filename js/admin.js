@@ -56,7 +56,11 @@ function loadProducts(password) {
 
             console.log("ADMIN: товары получены", data.products);
                     
-            adminProducts = data.products;
+            adminProducts = data.products.filter(function(product) {
+                return String(product["СТАТУС"] || "")
+                    .trim()
+                    .toLowerCase() === "в наличии";
+            });
             orderChanged = false;
                     
             renderProducts(adminProducts);
