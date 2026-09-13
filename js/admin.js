@@ -3,6 +3,8 @@ var API_URL = "https://script.google.com/macros/s/AKfycbyojAy2H8xpT74OARTBWDv2SY
 var productsContainer = document.getElementById("admin-products");
 var statusElement = document.getElementById("admin-status");
 
+var adminPassword = ""
+
 document.addEventListener("DOMContentLoaded", function() {
     askPassword();
 });
@@ -85,6 +87,16 @@ function renderProducts(products) {
             product["ПОРЯДОК"] ||
             "—";
 
+        var photo =
+            product["ФОТО"] ||
+            "";
+
+        if (photo) {
+            photo = String(photo)
+                .split(",")[0]
+                .trim();
+        }
+
         var item = document.createElement("div");
 
         item.className = "admin-product";
@@ -92,6 +104,14 @@ function renderProducts(products) {
         item.innerHTML = `
             <div class="admin-product-number">
                 ${index + 1}
+            </div>
+
+            <div class="admin-product-photo">
+                ${
+                    photo
+                    ? `<img src="${photo}" alt="">`
+                    : ""
+                }
             </div>
 
             <div class="admin-product-info">
@@ -114,11 +134,15 @@ function renderProducts(products) {
 
             <div class="admin-product-buttons">
 
-                <button disabled>
+                <button
+                    ${index === 0 ? "disabled" : ""}
+                    onclick="moveProduct('${product.id}', 'up')">
                     ↑
                 </button>
 
-                <button disabled>
+                <button
+                    ${index === products.length - 1 ? "disabled" : ""}
+                    onclick="moveProduct('${product.id}', 'down')">
                     ↓
                 </button>
 
@@ -127,4 +151,49 @@ function renderProducts(products) {
 
         productsContainer.appendChild(item);
     });
+}
+
+function moveProduct(rowId, direction) {
+
+    var password = prompt("Введите пароль администратора:");
+
+    if (!password) {
+        return;
+    }
+
+    statusElement.textContent = "ПЕРЕМЕЩЕНИЕ...";
+
+    fetch(API_URL, {
+        method: "POST",
+        headers: {
+            "Content-Type": "text/plain;charset=utf-8"
+        },
+        body: JSON.stringify({
+            action: "adminMoveProduct",
+            rowId: rowId,
+            direction: direction,
+            password: password
+        })
+    })
+        .then(function(response) {
+            return response.json();
+        })
+        .then(function(data) {
+
+            if (!data.success) {
+                statusElement.textContent =
+                    data.error || "ОШИБКА ПЕРЕМЕЩЕНИЯ";
+                return;
+            }
+
+            statusElement.textContent = "ГОТОВО";
+
+            loadProducts(password);
+        })
+        .catch(function(error) {
+            console.error("ADMIN: ошибка перемещения", error);
+
+            statusElement.textContent =
+                "ОШИБКА ПОДКЛЮЧЕНИЯ";
+        });
 }
