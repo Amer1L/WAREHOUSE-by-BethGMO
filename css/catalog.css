@@ -674,7 +674,7 @@ main {
 
 .consent-label input {
     margin-top: 2px;
-    accent-color: yellowgreen;
+    accent-color: #9acd32;
     cursor: pointer;
     flex-shrink: 0;
 }
