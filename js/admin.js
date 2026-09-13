@@ -5,6 +5,15 @@ var statusElement = document.getElementById("admin-status");
 
 var adminPassword = ""
 
+var adminProducts = [];
+var orderChanged = false;
+
+var saveOrderButton =
+    document.getElementById("save-order-button");
+
+
+
+
 document.addEventListener("DOMContentLoaded", function() {
     askPassword();
 });
@@ -46,8 +55,14 @@ function loadProducts(password) {
             }
 
             console.log("ADMIN: товары получены", data.products);
+                    
+            adminProducts = data.products;
+            orderChanged = false;
+                    
+            renderProducts(adminProducts);
 
-            renderProducts(data.products);
+            saveOrderButton.disabled = true;
+
 
             statusElement.textContent =
                 "ТОВАРОВ: " + data.products.length;
@@ -157,7 +172,64 @@ function renderProducts(products) {
 
 function moveProduct(rowId, direction) {
 
-    statusElement.textContent = "ПЕРЕМЕЩЕНИЕ...";
+    var currentIndex = adminProducts.findIndex(function(product) {
+        return String(product.id) === String(rowId);
+    });
+
+    if (currentIndex === -1) {
+        return;
+    }
+
+    var targetIndex =
+        direction === "up"
+        ? currentIndex - 1
+        : currentIndex + 1;
+
+    if (targetIndex < 0 || targetIndex >= adminProducts.length) {
+        return;
+    }
+
+    // Меняем товары местами
+    var temp = adminProducts[currentIndex];
+
+    adminProducts[currentIndex] =
+        adminProducts[targetIndex];
+
+    adminProducts[targetIndex] = temp;
+
+    // Обновляем порядок прямо в браузере
+    adminProducts.forEach(function(product, index) {
+        product["ПОРЯДОК"] = index + 1;
+    });
+
+    orderChanged = true;
+
+    renderProducts(adminProducts);
+
+    saveOrderButton.disabled = false;
+
+    statusElement.textContent =
+        "ЕСТЬ НЕСОХРАНЁННЫЕ ИЗМЕНЕНИЯ";
+}
+
+
+
+function saveOrder() {
+
+    if (!orderChanged) {
+        statusElement.textContent = "ИЗМЕНЕНИЙ НЕТ";
+        return;
+    }
+
+    statusElement.textContent =
+        "СОХРАНЕНИЕ ПОРЯДКА...";
+
+    var orderData = adminProducts.map(function(product, index) {
+        return {
+            rowId: product.id,
+            order: index + 1
+        };
+    });
 
     fetch(API_URL, {
         method: "POST",
@@ -165,10 +237,9 @@ function moveProduct(rowId, direction) {
             "Content-Type": "text/plain;charset=utf-8"
         },
         body: JSON.stringify({
-            action: "adminMoveProduct",
-            rowId: rowId,
-            direction: direction,
-            password: adminPassword
+            action: "adminSaveOrder",
+            password: adminPassword,
+            products: orderData
         })
     })
         .then(function(response) {
@@ -178,16 +249,23 @@ function moveProduct(rowId, direction) {
 
             if (!data.success) {
                 statusElement.textContent =
-                    data.error || "ОШИБКА ПЕРЕМЕЩЕНИЯ";
+                    data.error || "ОШИБКА СОХРАНЕНИЯ";
                 return;
             }
 
-            statusElement.textContent = "ГОТОВО";
+            orderChanged = false;
 
-            loadProducts(adminPassword);
+            saveOrderButton.disabled = true;
+
+            statusElement.textContent =
+                "ПОРЯДОК СОХРАНЁН ✓";
         })
         .catch(function(error) {
-            console.error("ADMIN: ошибка перемещения", error);
+
+            console.error(
+                "ADMIN: ошибка сохранения порядка",
+                error
+            );
 
             statusElement.textContent =
                 "ОШИБКА ПОДКЛЮЧЕНИЯ";
