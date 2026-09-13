@@ -4,62 +4,63 @@ var productsContainer = document.getElementById("admin-products");
 var statusElement = document.getElementById("admin-status");
 
 document.addEventListener("DOMContentLoaded", function() {
-
-    loadProducts();
-
+    askPassword();
 });
 
+function askPassword() {
+    var password = prompt("Введите пароль администратора:");
 
-function loadProducts() {
+    if (!password) {
+        statusElement.textContent = "ДОСТУП ОТМЕНЁН";
+        return;
+    }
 
-    statusElement.textContent = "ЗАГРУЗКА ТОВАРОВ...";
-
-    fetch(API_URL)
-
-        .then(function(response) {
-
-            if (!response.ok) {
-                throw new Error("HTTP error: " + response.status);
-            }
-
-            return response.json();
-
-        })
-
-        .then(function(products) {
-
-            console.log("ADMIN: товары получены", products);
-
-            renderProducts(products);
-
-            statusElement.textContent =
-                "ТОВАРОВ: " + products.length;
-
-        })
-
-        .catch(function(error) {
-
-            console.error("ADMIN: ошибка загрузки", error);
-
-            statusElement.textContent =
-                "ОШИБКА ЗАГРУЗКИ ТОВАРОВ";
-
-        });
-
+    loadProducts(password);
 }
 
+function loadProducts(password) {
+    statusElement.textContent = "ПРОВЕРКА ДОСТУПА...";
+
+    fetch(API_URL, {
+        method: "POST",
+        headers: {
+            "Content-Type": "text/plain;charset=utf-8"
+        },
+        body: JSON.stringify({
+            action: "adminGetProducts",
+            password: password
+        })
+    })
+        .then(function(response) {
+            return response.json();
+        })
+        .then(function(data) {
+
+            if (!data.success) {
+                statusElement.textContent = data.error || "ДОСТУП ЗАПРЕЩЁН";
+                return;
+            }
+
+            console.log("ADMIN: товары получены", data.products);
+
+            renderProducts(data.products);
+
+            statusElement.textContent =
+                "ТОВАРОВ: " + data.products.length;
+        })
+        .catch(function(error) {
+            console.error("ADMIN: ошибка", error);
+            statusElement.textContent = "ОШИБКА ПОДКЛЮЧЕНИЯ";
+        });
+}
 
 function renderProducts(products) {
-
     productsContainer.innerHTML = "";
 
     products.sort(function(a, b) {
-
         return Number(a["ПОРЯДОК"] || 999999) -
                Number(b["ПОРЯДОК"] || 999999);
-
     });
-
 
     products.forEach(function(product, index) {
 
@@ -83,7 +84,6 @@ function renderProducts(products) {
         var order =
             product["ПОРЯДОК"] ||
             "—";
-
 
         var item = document.createElement("div");
 
@@ -126,7 +126,5 @@ function renderProducts(products) {
         `;
 
         productsContainer.appendChild(item);
-
     });
-
 }
