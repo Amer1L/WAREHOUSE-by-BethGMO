@@ -8,9 +8,12 @@ var adminPassword = ""
 var adminProducts = [];
 var orderChanged = false;
 
-var saveOrderButton =
-    document.getElementById("save-order-button");
+var saveOrderButton = document.getElementById("save-order-button");
 
+var moveSelectedButton =
+    document.getElementById("move-selected-button");
+
+var selectedProducts = [];
 
 
 
@@ -123,6 +126,13 @@ function renderProducts(products) {
         item.className = "admin-product";
 
         item.innerHTML = `
+            <div class="admin-product-select">
+                <input
+                    type="checkbox"
+                    onchange="toggleProductSelection('${product.id}', this.checked)"
+                >
+            </div>
+
             <div class="admin-product-number">
                 ${index + 1}
             </div>
@@ -274,4 +284,64 @@ function saveOrder() {
             statusElement.textContent =
                 "ОШИБКА ПОДКЛЮЧЕНИЯ";
         });
+}
+
+function toggleProductSelection(rowId, checked) {
+
+    if (checked) {
+
+        if (!selectedProducts.includes(String(rowId))) {
+            selectedProducts.push(String(rowId));
+        }
+
+    } else {
+
+        selectedProducts =
+            selectedProducts.filter(function(id) {
+                return id !== String(rowId);
+            });
+    }
+
+    moveSelectedButton.disabled =
+        selectedProducts.length === 0;
+}
+
+
+function moveSelectedToTop() {
+
+    if (selectedProducts.length === 0) {
+        return;
+    }
+
+    var selected = [];
+    var unselected = [];
+
+    adminProducts.forEach(function(product) {
+
+        if (selectedProducts.includes(String(product.id))) {
+            selected.push(product);
+        } else {
+            unselected.push(product);
+        }
+
+    });
+
+    adminProducts = selected.concat(unselected);
+
+    adminProducts.forEach(function(product, index) {
+        product["ПОРЯДОК"] = index + 1;
+    });
+
+    selectedProducts = [];
+
+    moveSelectedButton.disabled = true;
+
+    orderChanged = true;
+
+    renderProducts(adminProducts);
+
+    saveOrderButton.disabled = false;
+
+    statusElement.textContent =
+        "ЕСТЬ НЕСОХРАНЁННЫЕ ИЗМЕНЕНИЯ";
 }
