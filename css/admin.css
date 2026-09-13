@@ -1,0 +1,383 @@
+/* =========================================
+   WAREHOUSE — ADMIN
+   ========================================= */
+
+/* ---------- БАЗА ---------- */
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100%;
+}
+
+body {
+    background-image: url('../fon3.png');
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-color: #0d0d0d;
+
+    color: #ffffff;
+    font-family: Arial, sans-serif;
+}
+
+
+/* ---------- HEADER ---------- */
+
+.header {
+    width: 100%;
+    padding: 25px 20px;
+}
+
+.header-content {
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.header h1 {
+    margin: 0;
+
+    color: #ffffff;
+
+    font-size: 28px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+
+/* ---------- ОСНОВНОЙ БЛОК ---------- */
+
+main {
+    width: 100%;
+    max-width: 1100px;
+
+    margin: 0 auto;
+    padding: 20px 20px 80px;
+}
+
+.admin-section {
+    width: 100%;
+
+    padding: 20px;
+
+    background: rgba(0, 0, 0, 0.35);
+
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+
+    backdrop-filter: blur(5px);
+}
+
+
+/* ---------- ЗАГОЛОВОК ---------- */
+
+.admin-section h2 {
+    margin: 0 0 15px 0;
+
+    color: #ffffff;
+
+    font-size: 20px;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+
+/* ---------- СТАТУС ---------- */
+
+#admin-status {
+    margin-bottom: 15px;
+
+    color: #888888;
+
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+}
+
+
+/* ---------- КНОПКА СОХРАНЕНИЯ ---------- */
+
+#save-order-button {
+    display: block;
+
+    width: 100%;
+
+    margin: 0 0 20px 0;
+    padding: 12px 14px;
+
+    background: #151515;
+
+    color: #ffffff;
+
+    border: 1px solid #292929;
+    border-radius: 5px;
+
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+
+    cursor: pointer;
+
+    transition:
+        border-color 0.2s ease,
+        color 0.2s ease,
+        opacity 0.2s ease;
+}
+
+#save-order-button:not(:disabled):hover {
+    border-color: yellowgreen;
+    color: yellowgreen;
+}
+
+#save-order-button:disabled {
+    opacity: 0.45;
+    cursor: default;
+}
+
+
+/* ---------- СПИСОК ТОВАРОВ ---------- */
+
+#admin-products {
+    width: 100%;
+}
+
+
+/* ---------- КАРТОЧКА ТОВАРА ---------- */
+
+.admin-product {
+    display: flex;
+    align-items: center;
+
+    width: 100%;
+
+    margin-bottom: 10px;
+    padding: 10px;
+
+    background: rgba(21, 21, 21, 0.85);
+
+    border: 1px solid #282828;
+    border-radius: 8px;
+
+    gap: 12px;
+}
+
+
+/* ---------- НОМЕР ---------- */
+
+.admin-product-number {
+    flex: 0 0 28px;
+
+    color: yellowgreen;
+
+    font-size: 18px;
+    font-weight: 800;
+
+    text-align: center;
+}
+
+
+/* ---------- ФОТО ---------- */
+
+.admin-product-photo {
+    flex: 0 0 70px;
+
+    width: 70px;
+    height: 70px;
+}
+
+.admin-product-photo img {
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    border: 1px solid #282828;
+    border-radius: 6px;
+}
+
+
+/* ---------- ИНФОРМАЦИЯ ---------- */
+
+.admin-product-info {
+    flex: 1;
+
+    min-width: 0;
+}
+
+.admin-product-name {
+    margin-bottom: 5px;
+
+    color: #ffffff;
+
+    font-size: 14px;
+    font-weight: bold;
+
+    text-transform: uppercase;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.admin-product-details {
+    color: #888888;
+
+    font-size: 12px;
+    line-height: 1.4;
+}
+
+.admin-product-status {
+    margin-top: 4px;
+
+    color: #888888;
+
+    font-size: 12px;
+}
+
+
+/* ---------- СТРЕЛКИ ---------- */
+
+.admin-product-buttons {
+    flex: 0 0 auto;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 5px;
+}
+
+.admin-product-buttons button {
+    width: 32px;
+    height: 30px;
+
+    padding: 0;
+
+    background: #151515;
+
+    color: #ffffff;
+
+    border: 1px solid #292929;
+    border-radius: 5px;
+
+    font-size: 16px;
+    line-height: 1;
+
+    cursor: pointer;
+
+    transition:
+        border-color 0.2s ease,
+        color 0.2s ease,
+        opacity 0.2s ease;
+}
+
+.admin-product-buttons button:not(:disabled):hover {
+    border-color: yellowgreen;
+    color: yellowgreen;
+}
+
+.admin-product-buttons button:disabled {
+    opacity: 0.3;
+    cursor: default;
+}
+
+
+/* =========================================
+   МОБИЛЬНАЯ ВЕРСИЯ
+   ========================================= */
+
+@media (max-width: 600px) {
+
+    .header {
+        padding: 20px 10px;
+    }
+
+    .header-content {
+        width: 100%;
+    }
+
+    .header h1 {
+        font-size: 22px;
+    }
+
+
+    main {
+        width: 100%;
+        max-width: none;
+
+        margin: 0;
+        padding: 10px 10px 60px;
+    }
+
+
+    .admin-section {
+        width: 100%;
+
+        padding: 15px;
+
+        border-radius: 10px;
+    }
+
+
+    .admin-section h2 {
+        font-size: 17px;
+    }
+
+
+    .admin-product {
+        gap: 8px;
+
+        padding: 8px;
+    }
+
+
+    .admin-product-number {
+        flex: 0 0 24px;
+
+        font-size: 16px;
+    }
+
+
+    .admin-product-photo {
+        flex: 0 0 60px;
+
+        width: 60px;
+        height: 60px;
+    }
+
+
+    .admin-product-name {
+        font-size: 12px;
+    }
+
+
+    .admin-product-details,
+    .admin-product-status {
+        font-size: 10px;
+    }
+
+
+    .admin-product-buttons button {
+        width: 30px;
+        height: 28px;
+
+        font-size: 15px;
+    }
+
+
+    #save-order-button {
+        padding: 11px 12px;
+
+        font-size: 12px;
+    }
+}
