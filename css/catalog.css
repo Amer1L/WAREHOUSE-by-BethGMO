@@ -863,3 +863,68 @@ main {
 }
 
 
+/* =========================================
+   ЗАМЕРЫ В МОДАЛЬНОМ ОКНЕ
+   ========================================= */
+
+#modal-measurements-block {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.measurement-section {
+    background: #151515;
+    border: 1px solid #252525;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.measurement-section summary {
+    list-style: none;
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 12px;
+
+    font-size: 0.78rem;
+    font-weight: bold;
+    color: #ffffff;
+    letter-spacing: 0.4px;
+}
+
+.measurement-section summary::-webkit-details-marker {
+    display: none;
+}
+
+.measurement-arrow {
+    color: yellowgreen;
+    font-size: 17px;
+    line-height: 1;
+
+    transition: transform 0.2s ease;
+}
+
+.measurement-section[open] .measurement-arrow {
+    transform: rotate(180deg);
+}
+
+.measurement-content {
+    padding: 0 12px 12px;
+
+    color: #ffffff;
+    font-size: 0.85rem;
+    line-height: 1.65;
+
+    white-space: pre-line;
+}
+
+.measurement-model-name {
+    color: yellowgreen;
+    font-weight: bold;
+    margin-bottom: 4px;
+}

@@ -462,7 +462,7 @@ function renderProducts(products, container) {
 
         var size =
             product["РАЗМЕР"] ||
-            "M";
+            "Не указан";
 
 
         var rawPhoto =
@@ -611,6 +611,210 @@ function openProduct(id) {
         "Описание отсутствует.";
 
 
+    // ==================================================
+    // ЗАМЕРЫ
+    // ==================================================
+
+    var measurementsBlock =
+        document.getElementById(
+            "modal-measurements-block"
+        );
+
+
+    if (measurementsBlock) {
+
+        measurementsBlock.innerHTML = "";
+
+
+        // ------------------------------
+        // Замеры одежды
+        // ------------------------------
+
+        var clothingMeasurements =
+            String(
+                item["ЗАМЕРЫ ОДЕЖДЫ"] || ""
+            ).trim();
+
+
+        // "пусто" считаем отсутствием замеров
+        var hasClothingMeasurements =
+            clothingMeasurements !== "" &&
+            clothingMeasurements.toLowerCase() !== "пусто";
+
+
+        if (hasClothingMeasurements) {
+
+            var clothingDetails =
+                document.createElement("details");
+
+            clothingDetails.className =
+                "measurement-section";
+
+
+            var clothingSummary =
+                document.createElement("summary");
+
+            clothingSummary.innerHTML =
+                '<span>ЗАМЕРЫ ОДЕЖДЫ</span>' +
+                '<span class="measurement-arrow">⌄</span>';
+
+
+            var clothingContent =
+                document.createElement("div");
+
+            clothingContent.className =
+                "measurement-content";
+
+
+            clothingContent.innerText =
+                clothingMeasurements;
+
+
+            clothingDetails.appendChild(
+                clothingSummary
+            );
+
+            clothingDetails.appendChild(
+                clothingContent
+            );
+
+            measurementsBlock.appendChild(
+                clothingDetails
+            );
+
+        }
+
+
+        // ------------------------------
+        // Замеры модели
+        // ------------------------------
+
+        var model =
+            item["ЗАМЕРЫ МОДЕЛИ"];
+
+
+        if (model) {
+
+            var modelRows = [];
+
+
+            if (String(model["РОСТ"] || "").trim()) {
+                modelRows.push(
+                    "Рост — " +
+                    model["РОСТ"] +
+                    " см"
+                );
+            }
+
+
+            if (String(model["ГРУДЬ"] || "").trim()) {
+                modelRows.push(
+                    "Грудь — " +
+                    model["ГРУДЬ"] +
+                    " см"
+                );
+            }
+
+
+            if (String(model["ТАЛИЯ"] || "").trim()) {
+                modelRows.push(
+                    "Талия — " +
+                    model["ТАЛИЯ"] +
+                    " см"
+                );
+            }
+
+
+            if (String(model["БЁДРА"] || "").trim()) {
+                modelRows.push(
+                    "Бёдра — " +
+                    model["БЁДРА"] +
+                    " см"
+                );
+            }
+
+
+            if (modelRows.length > 0) {
+
+                var modelDetails =
+                    document.createElement("details");
+
+                modelDetails.className =
+                    "measurement-section";
+
+
+                var modelSummary =
+                    document.createElement("summary");
+
+                modelSummary.innerHTML =
+                    '<span>ЗАМЕРЫ МОДЕЛИ</span>' +
+                    '<span class="measurement-arrow">⌄</span>';
+
+
+                var modelContent =
+                    document.createElement("div");
+
+                modelContent.className =
+                    "measurement-content";
+
+
+                var modelName =
+                    String(
+                        model["name"] || ""
+                    ).trim();
+
+
+                if (modelName) {
+
+                    var modelNameElement =
+                        document.createElement("div");
+
+                    modelNameElement.className =
+                        "measurement-model-name";
+
+                    modelNameElement.innerText =
+                        modelName;
+
+                    modelContent.appendChild(
+                        modelNameElement
+                    );
+
+                }
+
+
+                modelRows.forEach(function(row) {
+
+                    var rowElement =
+                        document.createElement("div");
+
+                    rowElement.innerText = row;
+
+                    modelContent.appendChild(
+                        rowElement
+                    );
+
+                });
+
+
+                modelDetails.appendChild(
+                    modelSummary
+                );
+
+                modelDetails.appendChild(
+                    modelContent
+                );
+
+                measurementsBlock.appendChild(
+                    modelDetails
+                );
+
+            }
+
+        }
+
+    }
+
+
     updateModalImage();
 
 
@@ -624,7 +828,6 @@ function openProduct(id) {
 
         addToCartBtn.innerText =
             "ДОБАВИТЬ В КОРЗИНУ";
-
 
         addToCartBtn.onclick =
             function() {
