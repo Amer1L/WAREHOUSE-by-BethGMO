@@ -698,37 +698,34 @@ function openProduct(id) {
             var modelRows = [];
 
 
-            if (String(model["РОСТ"] || "").trim()) {
+            if (String(model["height"] || "").trim()) {
                 modelRows.push(
                     "Рост — " +
-                    model["РОСТ"] +
+                    model["height"] +
                     " см"
                 );
             }
-
-
-            if (String(model["ГРУДЬ"] || "").trim()) {
+            
+            if (String(model["chest"] || "").trim()) {
                 modelRows.push(
                     "Грудь — " +
-                    model["ГРУДЬ"] +
+                    model["chest"] +
                     " см"
                 );
             }
-
-
-            if (String(model["ТАЛИЯ"] || "").trim()) {
+            
+            if (String(model["waist"] || "").trim()) {
                 modelRows.push(
                     "Талия — " +
-                    model["ТАЛИЯ"] +
+                    model["waist"] +
                     " см"
                 );
             }
-
-
-            if (String(model["БЁДРА"] || "").trim()) {
+            
+            if (String(model["hips"] || "").trim()) {
                 modelRows.push(
                     "Бёдра — " +
-                    model["БЁДРА"] +
+                    model["hips"] +
                     " см"
                 );
             }
