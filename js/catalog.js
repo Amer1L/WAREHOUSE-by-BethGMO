@@ -755,29 +755,6 @@ function openProduct(id) {
                     "measurement-content";
 
 
-                var modelName =
-                    String(
-                        model["name"] || ""
-                    ).trim();
-
-
-                if (modelName) {
-
-                    var modelNameElement =
-                        document.createElement("div");
-
-                    modelNameElement.className =
-                        "measurement-model-name";
-
-                    modelNameElement.innerText =
-                        modelName;
-
-                    modelContent.appendChild(
-                        modelNameElement
-                    );
-
-                }
-
 
                 modelRows.forEach(function(row) {
 
