@@ -86,15 +86,26 @@ main {
 
 .catalog-page {
     padding: 30px 0;
-    
+}
+
+.catalog-panel {
+    background-color: rgba(13, 13, 13, 0.214);
+    border: 2px solid rgba(255, 255, 255, 0.178);
+    border-radius: 12px;
+    padding: 20px;
+
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(10px);
 }
 
 .back-button {
+    display: inline-block;
     color: yellowgreen;
     font-size: 16px;
     font-weight: bold;
     text-decoration: none;
     letter-spacing: 1px;
+    margin-bottom: 24px;
     transition: color 0.3s ease;
 }
 
@@ -104,47 +115,18 @@ main {
 
 .catalog-title h2 {
     font-size: 20px;
-    margin-bottom: 15px;
+    margin: 0 0 15px;
 }
 
-/* Сетка категорий (в стиле кнопок с главной) */
+.drops-title {
+    margin-top: 38px;
+}
+
 .categories-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
     gap: 10px;
-    margin-bottom: 0px;
-            /* 1. Главное свойство — блюрит всё, что находится ЗА этим блоком */
-    backdrop-filter: blur(5px); 
-    -webkit-backdrop-filter: blur(10px); /* Для Safari и WebKit */
-
-    /* 2. Полупрозрачный цвет фона (обязательно!), иначе размытие не будет видно */
-    background-color: rgba(13, 13, 13, 0.214); /* Темная плашка (60% прозрачности) */
-
-    /* 3. Опционально: эффектная неоновая или тонкая рамка */
-    border: 2px solid rgba(255, 255, 255, 0.178);
-    border-radius: 12px;
-    padding: 20px;
 }
-
-
-.drop-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(140px, 0.3fr));
-    gap: 10px;
-    margin-bottom: 0px;
-            /* 1. Главное свойство — блюрит всё, что находится ЗА этим блоком */
-    backdrop-filter: blur(5px); 
-    -webkit-backdrop-filter: blur(10px); /* Для Safari и WebKit */
-
-    /* 2. Полупрозрачный цвет фона (обязательно!), иначе размытие не будет видно */
-    background-color: rgba(13, 13, 13, 0.214); /* Темная плашка (60% прозрачности) */
-
-    /* 3. Опционально: эффектная неоновая или тонкая рамка */
-    border: 2px solid rgba(255, 255, 255, 0.178);
-    border-radius: 12px;
-    padding: 20px;
-}
-
 
 .category-btn {
     display: flex;
@@ -175,6 +157,12 @@ main {
     border-color: yellowgreen;
 }
 
+.category-btn.active {
+    background-color: yellowgreen;
+    color: #000;
+    border-color: yellowgreen;
+}
+
 
 
 /* Сетка товаров с эффектом стекла */
@@ -189,8 +177,10 @@ main {
     background-color: rgba(20, 20, 20, 0.51);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
-    border: 1px solid #282828;
+
+    border: 1px solid rgba(255, 255, 255, 0.178);
     border-radius: 12px;
+
     overflow: hidden;
     display: flex;
     flex-direction: column;
