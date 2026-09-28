@@ -310,10 +310,12 @@ main {
 
 .z {
     color: yellowgreen;
+    font-weight: 800;
 
     transition: color 0.3s ease;
 
     cursor: default;
+
 }
 
 
