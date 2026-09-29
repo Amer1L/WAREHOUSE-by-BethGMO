@@ -583,10 +583,13 @@ main {
     resize: none;
 }
 
-.payment-note{
-    font-size: 12px;
-    color: #888;
-    margin: 0 0 7px 4px;
+.payment-note {
+    margin: -9px 0 10px;
+    color: rgb(255, 255, 255);
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.4;
+    text-align: left;
 }
 
 /* СТРАНИЦА СОГЛАСИЯ НА ОБРАБОТКУ ПЕРСОНАЛЬНЫХ ДАННЫХ */
@@ -918,4 +921,43 @@ main {
     color: yellowgreen;
     font-weight: bold;
     margin-bottom: 4px;
+}
+
+.exchange-option {
+    margin: 18px 0 16px;
+    padding: 14px;
+    background: rgba(154, 205, 50, 0.08);
+    border: 1px solid rgba(154, 205, 50, 0.45);
+    border-radius: 10px;
+}
+
+.exchange-title {
+    color: yellowgreen;
+    font-size: 0.85rem;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    margin-bottom: 5px;
+}
+
+.exchange-description {
+    color: #bbb;
+    font-size: 0.75rem;
+    line-height: 1.4;
+    margin-bottom: 11px;
+}
+
+.exchange-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    color: #fff;
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.exchange-checkbox input {
+    accent-color: yellowgreen;
+    cursor: pointer;
+    flex-shrink: 0;
 }
