@@ -1365,11 +1365,6 @@ function checkoutOrder() {
             "cart-address"
         ).value.trim();
 
-    var payment =
-        document.getElementById(
-            "cart-payment"
-        ).value;
-
     var comment =
         document.getElementById(
             "cart-comment"
@@ -1406,7 +1401,6 @@ function checkoutOrder() {
         phone: phone,
         tg: tg,
         address: address,
-        payment: payment,
         comment:
             comment ||
             "Нет комментария",
