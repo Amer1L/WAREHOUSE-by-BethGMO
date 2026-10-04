@@ -106,18 +106,96 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
     // Подсветка выбранной категории
-
-    var catButtons = document.querySelectorAll(".category, .category-btn");
-
+    
+    var catButtons = document.querySelectorAll(
+        ".category, .category-btn"
+    );
+    
+    var accessoriesSubcategories =
+        document.getElementById(
+            "accessories-subcategories"
+        );
+    
+    var accessoryCategories = [
+        "accessories",
+        "jewelry",
+        "bags",
+        "belts",
+        "headwear"
+    ];
+    
+    var isAccessoriesCategory =
+        accessoryCategories.includes(
+            selectedCategory
+        );
+    
     catButtons.forEach(function(btn) {
-
-        if (btn.getAttribute("data-cat") === selectedCategory) {
+    
+        var buttonCategory =
+            btn.getAttribute("data-cat");
+    
+        // Основная категория "Аксессуары"
+        if (
+            buttonCategory === "accessories" &&
+            btn.classList.contains("category-btn") &&
+            !btn.classList.contains(
+                "accessories-category-btn"
+            )
+        ) {
+        
+            if (isAccessoriesCategory) {
+                btn.classList.add("active");
+            } else {
+                btn.classList.remove("active");
+            }
+        
+            return;
+        }
+    
+        // Подкатегории аксессуаров
+        if (
+            btn.classList.contains(
+                "accessories-category-btn"
+            )
+        ) {
+        
+            if (
+                buttonCategory === selectedCategory
+            ) {
+                btn.classList.add("active");
+            } else {
+                btn.classList.remove("active");
+            }
+        
+            return;
+        }
+    
+        // Остальные основные категории
+        if (
+            buttonCategory === selectedCategory
+        ) {
             btn.classList.add("active");
         } else {
             btn.classList.remove("active");
         }
-
+    
     });
+    
+    
+    // Показываем подкатегории только внутри
+    // раздела "Аксессуары"
+    
+    if (accessoriesSubcategories) {
+    
+        if (isAccessoriesCategory) {
+            accessoriesSubcategories.style.display =
+                "block";
+        } else {
+            accessoriesSubcategories.style.display =
+                "none";
+        }
+    
+    }
 
 
     // Показываем первоначальную загрузку

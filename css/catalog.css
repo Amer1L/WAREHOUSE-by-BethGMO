@@ -122,10 +122,34 @@ main {
     margin-top: 38px;
 }
 
-.categories-grid {
+/*.categories-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
     gap: 10px;
+}*/
+
+.categories-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+
+.accessories-subcategories {
+    margin-top: 20px;
+    padding-top: 18px;
+    border-top: 1px solid rgba(255, 255, 255, 0.178);
+}
+
+.accessories-subtitle {
+    color: #ffffff;
+    font-size: 0.75rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+}
+
+.accessories-category-btn {
+    font-size: 0.75rem;
 }
 
 .category-btn {
