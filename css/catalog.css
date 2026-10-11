@@ -1119,3 +1119,254 @@ main {
     width: 16px;
     height: 16px;
 }
+
+/* =========================================
+   ПОДРОБНЫЕ ПРАВИЛА РЕФЕРАЛЬНОЙ СИСТЕМЫ
+   ========================================= */
+
+.referral-details-content {
+    padding: 14px 0 2px;
+    color: #c4c4c4;
+    font-size: 0.8rem;
+    line-height: 1.65;
+    overflow-wrap: anywhere;
+}
+
+/* Разделы правил */
+
+.referral-rules-section {
+    margin-bottom: 22px;
+}
+
+.referral-rules-section:last-child {
+    margin-bottom: 4px;
+}
+
+.referral-section-title {
+    margin: 0 0 9px;
+    color: #fff;
+    font-size: 0.86rem;
+    font-weight: 800;
+    line-height: 1.45;
+}
+
+.referral-intro {
+    margin: 0 0 12px;
+}
+
+/* Список скидок */
+
+.referral-discount-list {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-top: 10px;
+}
+
+.referral-discount-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 9px 11px;
+    background: rgba(255, 255, 255, 0.035);
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    border-radius: 7px;
+}
+
+.referral-discount-people {
+    color: #d2d2d2;
+    font-size: 0.78rem;
+}
+
+.referral-discount-value {
+    flex-shrink: 0;
+    color: yellowgreen;
+    font-size: 1rem;
+    font-weight: 800;
+}
+
+/* Дополнительная скидка за следующих подписчиков */
+
+.referral-discount-extra {
+    margin-top: 3px;
+    padding: 11px;
+    background: rgba(154, 205, 50, 0.08);
+    border-left: 2px solid yellowgreen;
+    border-radius: 0 6px 6px 0;
+    color: #ccc;
+    font-size: 0.78rem;
+    line-height: 1.55;
+}
+
+.referral-discount-extra strong {
+    color: yellowgreen;
+    font-weight: 800;
+}
+
+/* Текст правил */
+
+.referral-rules-section p {
+    margin: 0 0 10px;
+}
+
+.referral-rules-section p:last-child {
+    margin-bottom: 0;
+}
+
+/* Отступы на небольших экранах */
+
+@media (max-width: 480px) {
+    .referral-details-content {
+        font-size: 0.78rem;
+    }
+
+    .referral-section-title {
+        font-size: 0.84rem;
+    }
+
+    .referral-discount-row {
+        padding: 9px;
+    }
+
+    .referral-discount-people {
+        font-size: 0.75rem;
+    }
+
+    .referral-discount-value {
+        font-size: 0.95rem;
+    }
+}
+
+/* Компактные отступы в подробных правилах */
+
+.referral-details-content {
+    padding: 8px 0 2px;
+    line-height: 1.4;
+}
+
+.referral-rules-section {
+    margin-bottom: 12px;
+}
+
+.referral-section-title {
+    margin-bottom: 5px;
+    line-height: 1.3;
+}
+
+.referral-intro {
+    margin-bottom: 7px;
+}
+
+.referral-discount-list {
+    gap: 3px;
+    margin-top: 6px;
+}
+
+.referral-discount-row {
+    padding: 6px 9px;
+}
+
+.referral-discount-extra {
+    margin-top: 2px;
+    padding: 7px 9px;
+    line-height: 1.4;
+}
+
+.referral-rules-section p {
+    margin-bottom: 6px;
+}
+
+.referral-rules-section:last-child {
+    margin-bottom: 2px;
+}
+
+/* =========================================
+   КОМПАКТНОЕ ОФОРМЛЕНИЕ ПРАВИЛ СКИДОК
+   ========================================= */
+
+/* Расстояние от «Подробнее» до содержимого */
+.referral-details summary {
+    padding: 5px 0 0 !important;
+    margin: 0 !important;
+    line-height: 1.3 !important;
+}
+
+.referral-details-content {
+    padding: 5px 0 0 !important;
+    margin: 0 !important;
+    line-height: 1.4 !important;
+}
+
+/* Убираем большие промежутки между разделами */
+.referral-rules-section {
+    margin: 0 0 12px !important;
+    padding: 0 !important;
+}
+
+.referral-rules-section:last-child {
+    margin-bottom: 0 !important;
+}
+
+/* Заголовки разделов */
+.referral-section-title {
+    margin: 0 0 4px !important;
+    padding: 0 !important;
+    line-height: 1.3 !important;
+}
+
+/* Текст под заголовками */
+.referral-rules-section p,
+.referral-intro {
+    margin: 0 0 5px !important;
+    padding: 0 !important;
+    line-height: 1.4 !important;
+}
+
+/* Список скидок */
+.referral-discount-list {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 3px !important;
+    margin: 5px 0 0 !important;
+    padding: 0 !important;
+}
+
+.referral-discount-row {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 8px !important;
+
+    margin: 0 !important;
+    padding: 6px 9px !important;
+
+    line-height: 1.3 !important;
+}
+
+/* Одинаковый стиль для дополнительных +2% */
+.referral-discount-next {
+    background: rgba(255, 255, 255, 0.035) !important;
+    border: 1px solid rgba(255, 255, 255, 0.09) !important;
+    border-radius: 7px !important;
+}
+
+.referral-discount-people {
+    margin: 0 !important;
+    padding: 0 !important;
+    line-height: 1.3 !important;
+}
+
+.referral-discount-value {
+    margin: 0 !important;
+    padding: 0 !important;
+    line-height: 1.3 !important;
+}
+
+/* На случай, если старый стиль дополнительной скидки
+   всё ещё влияет на отображение */
+.referral-discount-extra {
+    margin: 0 !important;
+    padding: 6px 9px !important;
+    line-height: 1.4 !important;
+}
