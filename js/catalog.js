@@ -1407,94 +1407,94 @@ function openCartModal() {
 // ==================================================
 function checkoutOrder() {
     if (cart.length === 0) {
-        alert(
-            "Корзина пуста!"
-        );
+        alert("Корзина пуста!");
         return;
     }
 
-    var consent =
-        document.getElementById(
-            "personal-data-consent"
-        );
+    var consent = document.getElementById(
+        "personal-data-consent"
+    );
 
-    if (
-        !consent ||
-        !consent.checked
-    ) {
+    if (!consent || !consent.checked) {
         alert(
             "Пожалуйста, подтвердите согласие на обработку персональных данных."
         );
         return;
     }
 
-    var phone =
-        document.getElementById(
-            "cart-phone"
-        ).value.trim();
+    var phone = document.getElementById(
+        "cart-phone"
+    ).value.trim();
 
-    var tg =
-        document.getElementById(
-            "cart-tg"
-        ).value.trim();
+    var tg = document.getElementById(
+        "cart-tg"
+    ).value.trim();
 
-    var address =
-        document.getElementById(
-            "cart-address"
-        ).value.trim();
+    var address = document.getElementById(
+        "cart-address"
+    ).value.trim();
 
-    var comment =
-        document.getElementById(
-            "cart-comment"
-        ).value.trim();
+    var comment = document.getElementById(
+        "cart-comment"
+    ).value.trim();
 
-    if (
-        !address ||
-        !phone ||
-        !tg
-    ) {
+    if (!address || !phone || !tg) {
         alert(
             "Пожалуйста, заполните телефон, Telegram и адрес доставки 🙏"
         );
         return;
     }
 
-    var hasExchangeItems =
-        document.getElementById(
-            "has-exchange-items"
-        ).checked;
+    var exchangeCheckbox = document.getElementById(
+        "has-exchange-items"
+    );
 
-    var checkoutBtn =
-        document.getElementById(
-            "checkout-btn"
-        );
+    var referralCheckbox = document.getElementById(
+        "wants-referral-link"
+    );
 
-    checkoutBtn.disabled =
-        true;
+    var hasExchangeItems = Boolean(
+        exchangeCheckbox && exchangeCheckbox.checked
+    );
 
-    checkoutBtn.innerText =
-        "Отправка...";
+    var wantsReferralLink = Boolean(
+        referralCheckbox && referralCheckbox.checked
+    );
+
+    var checkoutBtn = document.getElementById(
+        "checkout-btn"
+    );
+
+    checkoutBtn.disabled = true;
+    checkoutBtn.innerText = "Отправка...";
 
     var payload = {
         phone: phone,
         tg: tg,
         address: address,
-        comment:
-            comment ||
-            "Нет комментария",
-        hasExchangeItems:
-            hasExchangeItems,
+
+        comment: comment || "Нет комментария",
+
+        hasExchangeItems: hasExchangeItems,
+
+        // Покупатель хочет получить ссылку на скидку.
+        // Это не влияет на создание самой ссылки.
+        wantsReferralLink: wantsReferralLink,
+
         items: cart
     };
 
     fetch(API_URL, {
         method: "POST",
-        body:
-            JSON.stringify(
-                payload
-            )
+        body: JSON.stringify(payload)
     })
-        .then(function() {
+        .then(function(response) {
+            if (!response.ok) {
+                throw new Error(
+                    "Сервер вернул HTTP " + response.status
+                );
+            }
+
             alert(
                 "Заказ успешно оформлен! Мы свяжемся с вами."
             );
@@ -1504,29 +1504,20 @@ function checkoutOrder() {
             saveCart();
             updateCartUI();
 
-            document
-                .getElementById(
-                    "cart-modal"
-                )
-                .classList
-                .remove("active");
+            document.getElementById(
+                "cart-modal"
+            ).classList.remove("active");
         })
         .catch(function(err) {
-            console.error(
-                "Ошибка заказа:",
-                err
-            );
+            console.error("Ошибка заказа:", err);
 
             alert(
-                "Ошибка при отправке заказа."
+                "Не удалось подтвердить отправку заказа. Проверьте соединение и попробуйте ещё раз."
             );
         })
         .finally(function() {
-            checkoutBtn.disabled =
-                false;
-
-            checkoutBtn.innerText =
-                "ОФОРМИТЬ ЗАКАЗ";
+            checkoutBtn.disabled = false;
+            checkoutBtn.innerText = "ОФОРМИТЬ ЗАКАЗ";
         });
 }
 

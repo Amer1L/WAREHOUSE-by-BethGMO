@@ -163,19 +163,47 @@
 
                     <textarea id="cart-comment" placeholder="Комментарий к заказу (необязательно)" class="cart-input cart-textarea"></textarea>
 
-                    <div class="exchange-option">
-                        <div class="exchange-title">
-                            ♻️ ЕСТЬ ВЕЩИ НА ОБМЕН?
+                    <!-- СКИДКА ЗА ПРИГЛАШЕНИЕ ДРУЗЕЙ -->
+                    <div class="referral-option">
+                    
+                        <div class="referral-title">
+                            СКИДКА ЗА ПРИГЛАШЕНИЕ ДРУЗЕЙ
                         </div>
                     
-                        <div class="exchange-description">
-                            Если у тебя есть вещи, которые хочешь предложить для обмена, отметь это.
+                        <div class="referral-description">
+                            Приглашай друзей в WAREHOUSE и получай скидку.
+                        </div>
+                    
+                        <label class="referral-checkbox">
+                            <input type="checkbox" id="wants-referral-link">
+                            <span>Хочу получить персональную ссылку-приглашение на скидку</span>
+                        </label>
+                    
+                        <details class="referral-details">
+                            <summary>
+                                <span>Подробнее</span>
+                                <span class="referral-arrow">⌄</span>
+                            </summary>
+                        
+                            <div class="referral-details-content">
+                                Подробная информация о системе скидок появится здесь.
+                            </div>
+                        </details>
+                    
+                    </div>
+
+                    <!-- ОБМЕН ВЕЩАМИ -->
+                    <div class="exchange-option">
+                    
+                        <div class="exchange-title">
+                            ♻️ Есть вещи на обмен?
                         </div>
                     
                         <label class="exchange-checkbox">
                             <input type="checkbox" id="has-exchange-items">
-                            <span>У меня есть вещи для обмена</span>
+                            <span>Хочу предложить вещи для обмена</span>
                         </label>
+                    
                     </div>
                     <label class="consent-label">
                         <input type="checkbox" id="personal-data-consent">

@@ -984,3 +984,138 @@ main {
     cursor: pointer;
     flex-shrink: 0;
 }
+
+
+/* =========================================
+   СКИДКА ЗА ПРИГЛАШЕНИЕ ДРУЗЕЙ
+   ========================================= */
+
+.referral-option {
+    margin: 0 0 14px;
+    padding: 15px;
+    background: rgba(154, 205, 50, 0.09);
+    border: 1px solid rgba(154, 205, 50, 0.55);
+    border-radius: 10px;
+}
+
+.referral-title {
+    color: yellowgreen;
+    font-size: 0.9rem;
+    font-weight: 800;
+    letter-spacing: 0.4px;
+    line-height: 1.4;
+    margin-bottom: 6px;
+}
+
+.referral-description {
+    color: #bbb;
+    font-size: 0.78rem;
+    line-height: 1.5;
+    margin-bottom: 12px;
+}
+
+.referral-checkbox {
+    display: flex;
+    align-items: flex-start;
+    gap: 9px;
+    color: #fff;
+    font-size: 0.8rem;
+    font-weight: 600;
+    line-height: 1.45;
+    cursor: pointer;
+}
+
+.referral-checkbox input {
+    accent-color: yellowgreen;
+    cursor: pointer;
+    flex-shrink: 0;
+    margin-top: 2px;
+    width: 16px;
+    height: 16px;
+}
+
+.referral-details {
+    margin-top: 12px;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.referral-details summary {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 11px 0 2px;
+    color: #ddd;
+    font-size: 0.8rem;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.referral-details summary::-webkit-details-marker {
+    display: none;
+}
+
+.referral-arrow {
+    color: yellowgreen;
+    font-size: 18px;
+    line-height: 1;
+    transition: transform 0.2s ease;
+}
+
+.referral-details[open] .referral-arrow {
+    transform: rotate(180deg);
+}
+
+.referral-details-content {
+    padding: 10px 0 2px;
+    color: #bbb;
+    font-size: 0.78rem;
+    line-height: 1.6;
+    white-space: pre-line;
+}
+
+
+/* =========================================
+   КОМПАКТНЫЙ БЛОК ОБМЕНА
+   ========================================= */
+
+.exchange-option {
+    margin: 0 0 16px;
+    padding: 10px 12px;
+    background: rgba(0, 0, 0, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 8px;
+}
+
+.exchange-title {
+    color: #ddd;
+    font-size: 0.76rem;
+    font-weight: 700;
+    letter-spacing: 0.2px;
+    margin-bottom: 8px;
+}
+
+.exchange-description {
+    display: none;
+}
+
+.exchange-checkbox {
+    display: flex;
+    align-items: flex-start;
+    gap: 9px;
+    color: #ccc;
+    font-size: 0.78rem;
+    font-weight: 500;
+    line-height: 1.45;
+    cursor: pointer;
+}
+
+.exchange-checkbox input {
+    accent-color: yellowgreen;
+    cursor: pointer;
+    flex-shrink: 0;
+    margin-top: 2px;
+    width: 16px;
+    height: 16px;
+}
