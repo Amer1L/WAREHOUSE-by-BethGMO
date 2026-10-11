@@ -1282,25 +1282,31 @@ main {
 }
 
 /* =========================================
-   КОМПАКТНОЕ ОФОРМЛЕНИЕ ПРАВИЛ СКИДОК
+   ФИНАЛЬНАЯ КОМПАКТНАЯ ВЁРСТКА ПРАВИЛ СКИДОК
    ========================================= */
 
-/* Расстояние от «Подробнее» до содержимого */
+/* Не сохраняем переносы строк из HTML */
+.referral-details-content {
+    white-space: normal !important;
+    padding: 4px 0 0 !important;
+    margin: 0 !important;
+    line-height: 1.4 !important;
+}
+
+/* Раскрывающийся блок */
+.referral-details {
+    margin-top: 6px !important;
+}
+
 .referral-details summary {
     padding: 5px 0 0 !important;
     margin: 0 !important;
     line-height: 1.3 !important;
 }
 
-.referral-details-content {
-    padding: 5px 0 0 !important;
-    margin: 0 !important;
-    line-height: 1.4 !important;
-}
-
-/* Убираем большие промежутки между разделами */
+/* Разделы с правилами */
 .referral-rules-section {
-    margin: 0 0 12px !important;
+    margin: 0 0 10px !important;
     padding: 0 !important;
 }
 
@@ -1308,17 +1314,17 @@ main {
     margin-bottom: 0 !important;
 }
 
-/* Заголовки разделов */
+/* Заголовки */
 .referral-section-title {
-    margin: 0 0 4px !important;
+    margin: 0 0 3px !important;
     padding: 0 !important;
     line-height: 1.3 !important;
 }
 
-/* Текст под заголовками */
+/* Обычный текст */
 .referral-rules-section p,
 .referral-intro {
-    margin: 0 0 5px !important;
+    margin: 0 0 4px !important;
     padding: 0 !important;
     line-height: 1.4 !important;
 }
@@ -1328,7 +1334,7 @@ main {
     display: flex !important;
     flex-direction: column !important;
     gap: 3px !important;
-    margin: 5px 0 0 !important;
+    margin: 4px 0 0 !important;
     padding: 0 !important;
 }
 
@@ -1337,36 +1343,33 @@ main {
     align-items: center !important;
     justify-content: space-between !important;
     gap: 8px !important;
-
     margin: 0 !important;
-    padding: 6px 9px !important;
-
+    padding: 5px 9px !important;
     line-height: 1.3 !important;
 }
 
-/* Одинаковый стиль для дополнительных +2% */
+/* Следующие подписчики оформлены так же */
 .referral-discount-next {
     background: rgba(255, 255, 255, 0.035) !important;
     border: 1px solid rgba(255, 255, 255, 0.09) !important;
     border-radius: 7px !important;
 }
 
-.referral-discount-people {
-    margin: 0 !important;
-    padding: 0 !important;
-    line-height: 1.3 !important;
-}
-
+/* Убираем дополнительные отступы у текста внутри строк */
+.referral-discount-people,
 .referral-discount-value {
     margin: 0 !important;
     padding: 0 !important;
     line-height: 1.3 !important;
 }
 
-/* На случай, если старый стиль дополнительной скидки
-   всё ещё влияет на отображение */
+/* На случай, если старый блок ещё используется */
 .referral-discount-extra {
-    margin: 0 !important;
-    padding: 6px 9px !important;
+    margin: 3px 0 0 !important;
+    padding: 5px 9px !important;
     line-height: 1.4 !important;
+}
+
+.sale-important-word{
+    color:yellowgreen;
 }
