@@ -767,101 +767,75 @@ function openProduct(id) {
         // Замеры модели
         // ------------------------------
 
-        var model =
-            item["ЗАМЕРЫ МОДЕЛИ"];
-
-
-        if (model) {
-
-            var modelRows = [];
-
-
-            if (String(model["height"] || "").trim()) {
-                modelRows.push(
-                    "Рост — " +
-                    model["height"] +
-                    " см"
-                );
-            }
+        // ------------------------------
+        // Общие замеры моделей
+        // ------------------------------
             
-            if (String(model["chest"] || "").trim()) {
-                modelRows.push(
-                    "Грудь — " +
-                    model["chest"] +
-                    " см"
-                );
-            }
+        var models = Array.isArray(item["ЗАМЕРЫ МОДЕЛЕЙ"])
+            ? item["ЗАМЕРЫ МОДЕЛЕЙ"]
+            : (item["ЗАМЕРЫ МОДЕЛИ"]
+                ? [item["ЗАМЕРЫ МОДЕЛИ"]]
+                : []);
             
-            if (String(model["waist"] || "").trim()) {
-                modelRows.push(
-                    "Талия — " +
-                    model["waist"] +
-                    " см"
-                );
-            }
+        if (models.length > 0) {
+            var measurements = document.createElement("details");
+            measurements.className = "measurement-section";
+        
+            var summary = document.createElement("summary");
+            summary.innerHTML =
+                '<span>ЗАМЕРЫ МОДЕЛЕЙ</span>' +
+                '<span class="measurement-arrow">⌄</span>';
+        
+            var content = document.createElement("div");
+            content.className = "measurement-content";
+        
+            models.forEach(function(model, index) {
+                if (!model) {
+                    return;
+                }
             
-            if (String(model["hips"] || "").trim()) {
-                modelRows.push(
-                    "Бёдра — " +
-                    model["hips"] +
-                    " см"
-                );
-            }
-
-
-            if (modelRows.length > 0) {
-
-                var modelDetails =
-                    document.createElement("details");
-
-                modelDetails.className =
-                    "measurement-section";
-
-
-                var modelSummary =
-                    document.createElement("summary");
-
-                modelSummary.innerHTML =
-                    '<span>ЗАМЕРЫ МОДЕЛИ</span>' +
-                    '<span class="measurement-arrow">⌄</span>';
-
-
-                var modelContent =
-                    document.createElement("div");
-
-                modelContent.className =
-                    "measurement-content";
-
-
-
-                modelRows.forEach(function(row) {
-
-                    var rowElement =
-                        document.createElement("div");
-
-                    rowElement.innerText = row;
-
-                    modelContent.appendChild(
-                        rowElement
-                    );
-
+                var modelBlock = document.createElement("div");
+                modelBlock.className = "model-measurements";
+            
+                if (models.length > 1) {
+                    var heading = document.createElement("div");
+                    heading.className = "model-measurements-title";
+                    heading.textContent = "Модель № " + (index + 1);
+                    modelBlock.appendChild(heading);
+                }
+            
+                var rows = [
+                    ["Рост", model.height],
+                    ["Грудь", model.chest],
+                    ["Талия", model.waist],
+                    ["Бёдра", model.hips]
+                ];
+            
+                rows.forEach(function(row) {
+                    if (
+                        row[1] === null ||
+                        row[1] === undefined ||
+                        String(row[1]).trim() === ""
+                    ) {
+                        return;
+                    }
+                
+                    var line = document.createElement("div");
+                    line.className = "model-measurement-row";
+                    line.textContent = row[0] + " — " + row[1] + " см";
+                    modelBlock.appendChild(line);
                 });
-
-
-                modelDetails.appendChild(
-                    modelSummary
-                );
-
-                modelDetails.appendChild(
-                    modelContent
-                );
-
-                measurementsBlock.appendChild(
-                    modelDetails
-                );
-
+            
+                if (modelBlock.children.length > 0) {
+                    content.appendChild(modelBlock);
+                }
+            });
+        
+            if (content.children.length > 0) {
+                measurements.appendChild(summary);
+                measurements.appendChild(content);
+                measurementsBlock.appendChild(measurements);
             }
-
         }
 
     }
