@@ -1394,6 +1394,12 @@ main {
 
 /* Следующие подписчики оформлены так же */
 .referral-discount-next {
+    background: rgba(154, 205, 50, 0.435) !important;
+    border: 1px solid rgba(154, 205, 50, 0.49) !important;
+    border-radius: 7px !important;
+}
+
+.max-sale {
     background: rgba(154, 205, 50, 0.535) !important;
     border: 1px solid rgba(154, 205, 50, 0.59) !important;
     border-radius: 7px !important;
