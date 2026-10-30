@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>WAREHOUSE — таблица скидок</title>
+
+  <!-- Если файл лежит рядом с catalog.css, он подхватит шрифты и общие переменные магазина. -->
+  <link rel="stylesheet" href="catalog.css">
+
+  <style>
+    :root {
+      --promo-green: #a6e34b;
+      --promo-white: #f4f5ef;
+      --promo-muted: rgba(244,245,239,.66);
+      --promo-line: rgba(244,245,239,.28);
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body { margin: 0; min-height: 100%; }
+
+    body {
+      background: #000000;
+      color: var(--promo-white);
+      font-family: Arial, Helvetica, sans-serif;
+      padding: 0;
+      margin: 0;
+    }
+
+    /* Рабочая область для скриншота. Фон можно удалить в Photoshop. */
+
+    .promo {
+      width: 1080px;
+      height: 1680px;
+      margin: 0 auto;
+      padding: 100px 150px 80px; 
+      overflow: hidden;
+    }
+
+    .brand {
+      color: var(--promo-green);
+      font-size: 24px;
+      font-weight: 800;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      margin-bottom: 72px;
+    }
+
+    .brand span {
+      color: var(--promo-white);
+      font-weight: 400;
+      letter-spacing: .04em;
+      text-transform: none;
+    }
+
+    .eyebrow {
+      color: var(--promo-green);
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    h1 {
+      font-size: clamp(38px, 6vw, 68px);
+      line-height: .98;
+      letter-spacing: -.045em;
+      margin: 0 0 28px;
+      font-weight: 850;
+    }
+
+    .product-line {
+      display: flex;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 10px 24px;
+      padding-bottom: 22px;
+      border-bottom: 1px solid var(--promo-line);
+      margin-bottom: 26px;
+    }
+
+    .product-name {
+      font-size: clamp(20px, 3vw, 30px);
+      font-weight: 700;
+    }
+
+    .original-price {
+      color: var(--promo-muted);
+      font-size: clamp(17px, 2.5vw, 23px);
+    }
+
+    .original-price strong {
+      color: var(--promo-white);
+      font-weight: 700;
+    }
+
+    .table-head, .discount-row {
+      display: grid;
+      grid-template-columns: 1fr .65fr .85fr;
+      align-items: center;
+      column-gap: 8px;
+    }
+
+    .table-head {
+      color: var(--promo-muted);
+      font-size: 16px;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      padding: 0 0 16px;
+    }
+
+    .discount-row {
+      min-height: 57px;
+      border-top: 1px solid var(--promo-line);
+      font-size: 27px;
+    }
+
+    .discount-row .people { color: var(--promo-white); }
+    .discount-row .percent { color: var(--promo-green); font-weight: 750; }
+    .discount-row .final-price { font-weight: 750; text-align: right; }
+
+    .discount-row.is-max {
+      border-bottom: 1px solid var(--promo-line);
+      margin-top: 5px;
+      padding-top: 5px;
+    }
+
+    .discount-row.is-max .people,
+    .discount-row.is-max .percent,
+    .discount-row.is-max .final-price {
+      font-weight: 850;
+    }
+
+    .footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 20px;
+      margin-top: 34px;
+      color: var(--promo-muted);
+      font-size: 17px;
+      line-height: 1.5;
+    }
+
+    .footer strong { color: var(--promo-green); }
+
+    /* Для прозрачного экспорта: добавь к body класс transparent-bg. */
+    body.transparent-bg { background: transparent; }
+
+    /* Просмотр макета на экране */
+    .promo {
+        width: 1080px;
+        height: 1680px;
+        margin: 0 auto;
+        padding: 112px 120px 100px;
+        overflow: hidden;
+    }
+    
+    /* Кнопка экспорта не попадёт в PNG */
+    .export-controls {
+        display: flex;
+        justify-content: center;
+        padding: 24px;
+    }
+    
+    .export-controls button {
+        background: #a6e34b;
+        color: #171a16;
+        border: none;
+        border-radius: 6px;
+        padding: 14px 26px;
+        font-size: 16px;
+        font-weight: 700;
+        cursor: pointer;
+    }
+    
+    /* Уменьшаем только отображение на экране, а не сам макет */
+    @media (max-width: 1080px) {
+        .promo {
+            zoom: calc(100vw / 1080);
+        }
+    }
+
+    /* Акцент на первых пяти уровнях скидки */
+    .discount-row:nth-child(-n+4) {
+        min-height: 68px;
+        font-size: 32px;
+        font-weight: 800;
+    }
+
+    .discount-row:nth-child(-n+4) .percent {
+        font-weight: 900;
+    }
+
+    .discount-row:nth-child(-n+4) .final-price {
+        font-weight: 900;
+    }
+
+    /* Максимальная скидка */
+    .discount-row.is-max {
+        min-height: 76px;
+        font-size: 34px;
+        font-weight: 900;
+        border-bottom: 1px solid var(--promo-line);
+    }
+
+  </style>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+</head>
+
+<body>
+  <main class="promo">
+
+    <!-- МЕНЯЙ ЗДЕСЬ НАЗВАНИЕ И ЦЕНУ ТОВАРА -->
+    <section class="product-line"
+      data-product-name="Укороченная куртка-бомбер цвета хаки"
+      data-original-price="430">
+      <div class="product-name">Название товара</div>
+      <div class="original-price">Обычная цена: <strong>1 500 ₽</strong></div>
+    </section>
+
+    <section aria-label="Таблица скидок">
+      <div class="table-head">
+        <span>Подписчиков</span>
+        <span>Скидка</span>
+        <span style="text-align:right">Твоя цена</span>
+      </div>
+      <div id="discount-rows"></div>
+    </section>
+
+  </main>
+  <div class="export-controls">
+      <button id="export-png">Сохранить PNG</button>
+    </div>
+
+  <script>
+      /*
+        ДЛЯ НОВОГО РОЛИКА МЕНЯЙ ТОЛЬКО:
+        1. data-product-name
+        2. data-original-price
+        Остальное пересчитается автоматически.
+      */
+      (() => {
+        const product = document.querySelector('.product-line');
+        const rowsContainer = document.getElementById('discount-rows');
+      
+        const price = Number(product.dataset.originalPrice);
+        const money = value => Math.round(value).toLocaleString('ru-RU') + ' ₽';
+      
+        product.querySelector('.product-name').textContent = product.dataset.productName;
+        product.querySelector('.original-price strong').textContent = money(price);
+      
+        for (let people = 1; people <= 24; people++) {
+          let discount;
+        
+          if (people === 1) discount = 5;
+          else if (people === 2) discount = 10;
+          else if (people === 3) discount = 15;
+          else discount = Math.min(20 + (people - 4) * 3, 80);
+        
+          const finalPrice = price * (1 - discount / 100);
+          const row = document.createElement('div');
+        
+          row.className = 'discount-row' + (people === 24 ? ' is-max' : '');
+          row.innerHTML = `
+            <span class="people">${people} ${people === 1 ? 'человек' : people < 5 ? 'человека' : 'человек'}</span>
+            <span class="percent">${discount}%</span>
+            <span class="final-price">${money(finalPrice)}</span>
+          `;
+        
+          rowsContainer.appendChild(row);
+        }
+      })();
+    </script>
+    <script>
+  document.getElementById('export-png').addEventListener('click', async () => {
+      const button = document.getElementById('export-png');
+  
+      if (typeof html2canvas === 'undefined') {
+          alert('Не удалось загрузить библиотеку экспорта. Проверь интернет-соединение.');
+          return;
+      }
+    
+      button.disabled = true;
+      button.textContent = 'Создаём изображение...';
+    
+      try {
+          const canvas = await html2canvas(
+              document.querySelector('.promo'),
+              {
+                  backgroundColor: '#000000',
+                  scale: 2,
+                  width: 1080,
+                  height: 1680,
+                  windowWidth: 1080,
+                  windowHeight: 1680,
+                  scrollX: 0,
+                  scrollY: 0,
+                  useCORS: true
+              }
+          );
+            
+          const link = document.createElement('a');
+          link.download = 'warehouse-discount.png';
+          link.href = canvas.toDataURL('image/png');
+          link.click();
+      } catch (error) {
+          console.error(error);
+          alert('Не удалось создать изображение.');
+      } finally {
+          button.disabled = false;
+          button.textContent = 'Сохранить PNG';
+      }
+  });
+  </script>
+</body>
+</html>
