@@ -230,16 +230,17 @@ document.addEventListener("DOMContentLoaded", function() {
             allProducts = filterValidProducts(data);
 
 
-            // Только товары в наличии
+            // Товары в наличии и забронированные
 
             visibleProducts = allProducts.filter(function(product) {
-
+            
                 var status = String(
                     product["СТАТУС"] || ""
                 ).trim().toLowerCase();
-
-                return status === "в наличии";
-
+            
+                return status === "в наличии" ||
+                       status === "забронирован";
+            
             });
 
 
@@ -542,6 +543,12 @@ function renderProducts(products, container) {
             product["РАЗМЕР"] ||
             "Не указан";
 
+        var status = String(
+            product["СТАТУС"] || ""
+        ).trim().toLowerCase();
+
+        var isReserved = status === "забронирован";
+
 
         var rawPhoto =
             String(
@@ -574,6 +581,10 @@ function renderProducts(products, container) {
                     'onerror="this.src=\'' +
                     FALLBACK_IMAGE +
                     '\'">' +
+
+                (isReserved
+                    ? '<span class="product-reserved-badge">ЗАБРОНИРОВАН</span>'
+                    : '') +
 
                 '<span class="product-badge">' +
                     size +
@@ -638,6 +649,34 @@ function openProduct(id) {
 
     if (!item) {
         return;
+    }
+
+    var status = String(
+        item["СТАТУС"] || ""
+    ).trim().toLowerCase();
+    
+    var isReserved = status === "забронирован";
+    
+    // Статус товара
+    var modalTag = document.querySelector(".modal-tag");
+    
+    if (modalTag) {
+        modalTag.innerText = isReserved
+            ? "ЗАБРОНИРОВАН"
+            : "В НАЛИЧИИ";
+    
+        modalTag.classList.toggle("reserved", isReserved);
+    }
+    
+    // Пояснение о бронировании
+    var reservedNote = document.getElementById(
+        "modal-reserved-note"
+    );
+    
+    if (reservedNote) {
+        reservedNote.style.display = isReserved
+            ? "block"
+            : "none";
     }
 
 
@@ -848,6 +887,37 @@ function openProduct(id) {
         document.getElementById(
             "modal-buy-btn"
         );
+    
+    if (addToCartBtn) {
+    
+        if (isReserved) {
+        
+            addToCartBtn.style.display = "none";
+            addToCartBtn.onclick = null;
+        
+        } else {
+        
+            addToCartBtn.style.display = "block";
+        
+            addToCartBtn.innerText =
+                "ДОБАВИТЬ В КОРЗИНУ";
+        
+            addToCartBtn.onclick = function() {
+            
+                addToCart(item);
+            
+                document
+                    .getElementById("product-modal")
+                    .classList
+                    .remove("active");
+            
+                openCartModal();
+            
+            };
+        
+        }
+    
+    }
 
 
     if (addToCartBtn) {

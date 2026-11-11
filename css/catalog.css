@@ -1445,3 +1445,77 @@ main {
     font-size: 0.8rem;
     line-height: 1.5;
 }
+
+
+/* ПЛАШКА ЗАБРОНИРОВАННОГО ТОВАРА */
+
+.product-reserved-badge {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+
+    background: rgba(235, 145, 55, 0.9);
+    color: #000;
+
+    border: 1px solid rgba(255, 190, 110, 0.4);
+
+    font-size: 0.7rem;
+    font-weight: bold;
+
+    padding: 3px 7px;
+    border-radius: 6px;
+
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+}
+
+
+/* СТАТУС В ОТКРЫТОЙ КАРТОЧКЕ */
+
+.modal-tag.reserved {
+    background: #eb9137;
+    color: #000;
+}
+
+
+/* ПОЯСНЕНИЕ О БРОНИРОВАНИИ */
+.product-reserved-badge {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+
+    background: rgba(255, 123, 0, 0.493);
+    color: #ffffff;
+
+    border: 1px solid rgba(235, 145, 55, 0.15);
+
+    font-size: 0.7rem;
+    font-weight: bold;
+
+    padding: 3px 7px;
+    border-radius: 6px;
+
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+}
+
+.reserved-note p {
+    font-size: 0.8rem;
+    line-height: 1.5;
+    color: #ccc;
+    margin: 0 0 8px;
+}
+
+.reserved-note p:last-child {
+    margin-bottom: 0;
+}
+
+.reserved-note a {
+    color: #eb9137;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.reserved-note a:hover {
+    text-decoration: underline;
+}
