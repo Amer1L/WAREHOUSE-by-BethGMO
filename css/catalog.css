@@ -311,7 +311,7 @@ main {
 
 .product-card:hover .buy-btn {
     background-color: yellowgreen;
-    border-color: yellowgreen;
+    border-color: #9acd32;
     color: #000;
 }
 
@@ -1501,10 +1501,11 @@ main {
 }
 
 .reserved-note p {
-    font-size: 0.8rem;
+    font-size: 0.9rem;
     line-height: 1.5;
     color: #ccc;
     margin: 0 0 8px;
+    font-weight: bold
 }
 
 .reserved-note p:last-child {
@@ -1519,4 +1520,71 @@ main {
 
 .reserved-note a:hover {
     text-decoration: underline;
+}
+
+
+/* ФИЛЬТР ЗАБРОНИРОВАННЫХ ТОВАРОВ */
+
+.reserved-filter {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    width: fit-content;
+    margin: 16px 0 0px;
+
+    cursor: pointer;
+    user-select: none;
+}
+
+/* Скрываем стандартный чекбокс */
+
+.reserved-filter input {
+    display: none;
+}
+
+/* Квадратик чекбокса */
+
+.reserved-filter-check {
+    width: 17px;
+    height: 17px;
+
+    flex-shrink: 0;
+
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    border-radius: 4px;
+
+    background: rgba(0, 0, 0, 0.2);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    transition: 0.2s ease;
+}
+
+/* Галочка */
+
+.reserved-filter input:checked +
+.reserved-filter-check {
+
+    background: rgba(120, 160, 39, 0.75);
+    border-color: rgba(153, 205, 50, 0.8);
+}
+
+.reserved-filter input:checked +
+.reserved-filter-check::after {
+    content: "✓";
+
+    color: #fff;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+/* Текст */
+
+.reserved-filter-text {
+    color: #ccc;
+    font-size: 0.9rem;
+    letter-spacing: 0.3px;
 }

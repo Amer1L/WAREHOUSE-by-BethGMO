@@ -230,79 +230,119 @@ document.addEventListener("DOMContentLoaded", function() {
             allProducts = filterValidProducts(data);
 
 
-            // Товары в наличии и забронированные
+            // Фильтрация товаров
 
-            visibleProducts = allProducts.filter(function(product) {
+            var reservedCheckbox = document.getElementById("show-reserved");
+                    
+                    
+            function updateVisibleProducts() {
             
-                var status = String(
-                    product["СТАТУС"] || ""
-                ).trim().toLowerCase();
+                var showReserved = reservedCheckbox
+                    ? reservedCheckbox.checked
+                    : true;
             
-                return status === "в наличии" ||
-                       status === "забронирован";
             
-            });
-
-
-            // Сортировка
-
-            visibleProducts.sort(function(a, b) {
-
-                return Number(a["ПОРЯДОК"] || 999999) -
-                       Number(b["ПОРЯДОК"] || 999999);
-
-            });
-
-
-            // Фильтр категории
-
-            if (selectedCategory !== "all") {
-
-                visibleProducts = visibleProducts.filter(function(product) {
-
-                    var cat = String(
-                        product["КАТЕГОРИЯ"] || ""
-                    ).toLowerCase();
-
-                    return cat.includes(
-                        selectedCategory.toLowerCase()
-                    );
-
+                // Статусы товаров
+            
+                visibleProducts = allProducts.filter(function(product) {
+                
+                    var status = String(
+                        product["СТАТУС"] || ""
+                    ).trim().toLowerCase();
+                
+                    return status === "в наличии" ||
+                           (showReserved && status === "забронирован");
+                
                 });
-
+            
+            
+                // Сортировка
+            
+                visibleProducts.sort(function(a, b) {
+                
+                    return Number(a["ПОРЯДОК"] || 999999) -
+                           Number(b["ПОРЯДОК"] || 999999);
+                
+                });
+            
+            
+                // Фильтр категории
+            
+                if (selectedCategory !== "all") {
+                
+                    visibleProducts = visibleProducts.filter(function(product) {
+                    
+                        var cat = String(
+                            product["КАТЕГОРИЯ"] || ""
+                        ).toLowerCase();
+                    
+                        return cat.includes(
+                            selectedCategory.toLowerCase()
+                        );
+                    
+                    });
+                
+                }
+            
+            
+                // Сбрасываем каталог
+            
+                loadedCount = 0;
+            
+                productsContainer.innerHTML = "";
+            
+            
+                // Если товаров нет
+            
+                if (visibleProducts.length === 0) {
+                
+                    productsContainer.innerHTML =
+                        "<p style='color: #888; text-align: center; width: 100%; grid-column: 1/-1;'>" +
+                        "Товары не найдены" +
+                        "</p>";
+                
+                    hideCatalogLoading();
+                
+                    return;
+                }
+            
+            
+                // Первая партия
+            
+                if (isLoadingBatch) {
+                
+                    setTimeout(function() {
+                    
+                        if (!isLoadingBatch) {
+                            loadNextBatch(productsContainer);
+                        }
+                    
+                    }, 200);
+                
+                } else {
+                
+                    loadNextBatch(productsContainer);
+                
+                }
+            
             }
-
-
-            console.log(
-                "ТОВАРОВ В КАТЕГОРИИ:",
-                visibleProducts
-            );
-
-
-            // Сбрасываем счётчик
-
-            loadedCount = 0;
-
-
-            // Если товаров нет
-
-            if (visibleProducts.length === 0) {
-
-                productsContainer.innerHTML =
-                    "<p style='color: #888; text-align: center; width: 100%; grid-column: 1/-1;'>" +
-                    "Товары не найдены" +
-                    "</p>";
-
-                hideCatalogLoading();
-
-                return;
+            
+            
+            // Слушаем переключение галочки
+            
+            if (reservedCheckbox) {
+            
+                reservedCheckbox.addEventListener(
+                    "change",
+                    updateVisibleProducts
+                );
+            
             }
-
-
-            // Первая партия
-
-            loadNextBatch(productsContainer);
-
+            
+            
+            // Первоначальное отображение
+            
+            updateVisibleProducts();
         })
 
         .catch(function(err) {
